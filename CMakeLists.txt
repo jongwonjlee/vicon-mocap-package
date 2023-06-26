@@ -1,4 +1,4 @@
-#    vicon_mocap_package
+#    vicon-mocap-package
 #    Copyright (C) 2023 Jongwon Lee
 #
 #    This program is free software: you can redistribute it and/or modify
