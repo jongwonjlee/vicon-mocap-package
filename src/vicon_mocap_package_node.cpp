@@ -21,7 +21,6 @@
 */
 #include <iostream>
 
-
 // Vicon Includes
 #include "ViconDataStreamSDK/Linux64/DataStreamClient.h"
 
@@ -52,7 +51,6 @@ int main(int argc, char **argv)
 
     // Initialize the ROS handle
     ros::NodeHandle nh;
-    
     // Set up ROS node and publisher 
     ros::Publisher pub_mocap1 = nh.advertise<geometry_msgs::PoseStamped>("mocap/posestamped", 1000);
     ros::Publisher pub_mocap2 = nh.advertise<vicon_mocap_package::quality_msg>("mocap/qualityscore", 1000);
@@ -74,7 +72,6 @@ int main(int argc, char **argv)
     if (Output_isconn.Connected == false)
     {
 	cout << "System Failed to Connect to Vicon Server" << endl;
-    return 0;
     }    
     else
     {
@@ -135,6 +132,7 @@ int main(int argc, char **argv)
 		string seg_name = ViconClient.GetSegmentName(subject_name, 0).SegmentName;
         	cout << "Object Name: " << seg_name << endl;
 		mocap_msg.header.frame_id = seg_name;
+                mocap_msg.header.stamp = ros::Time::now();
 
 		// Get the global translation in mm
 		Output_GetSegmentGlobalTranslation segmentGlobalTrans = ViconClient.GetSegmentGlobalTranslation(subject_name, seg_name); 
@@ -179,4 +177,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
